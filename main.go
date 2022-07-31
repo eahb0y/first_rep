@@ -58,4 +58,5 @@ func main() {
 	for _, v := range animals {
 		log.Println(v)
 	}
+	fmt.Print("hello")
 }
