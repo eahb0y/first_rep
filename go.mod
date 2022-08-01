@@ -1,4 +1,4 @@
-module pjt
+module first_rep
 
 go 1.18
 
