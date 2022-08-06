@@ -24,7 +24,7 @@ import (
 
 type Pet struct {
 	ID        int     `db:"id" json:"id"`
-	Name      string  `db:"name" json:"name" query:"name"`
+	Name      string  `db:"name" json:"Name" query:"Name"`
 	Age       int     `db:"age" json:"age" query:"age"`
 	Gender    string  `db:"gender" json:"gender" query:"gender"`
 	CanFly    bool    `db:"can_fly" json:"can_fly" query:"can_fly"`
