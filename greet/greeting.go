@@ -15,4 +15,5 @@ func PrintCircleArea(radius int) {
 }
 func CalculateCricleArea(radius int) float32 {
 	return float32(radius) * float32(radius) * pi
+
 }
