@@ -8,8 +8,9 @@ import (
 	"github.com/jmoiron/sqlx"
 )
 
-var schema = `
-	CREATE TABLE IF NOT EXISTS pets (
+//database
+var customers = `
+	CREATE TABLE IF NOT EXISTS customers (
 		id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
 		name VARCHAR(255),
 		age INT(6) UNSIGNED,
@@ -20,14 +21,23 @@ var schema = `
 		pet_id INT(2) UNSIGNED,
 	)
 `
-var chema = `
-	CREATE TABLE IF NOT EXISTS pets_type(
+var tables = `
+	CREATE TABLE IF NOT EXISTS tables(
 		id INT(2) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
 		type VARCHAR(255),
 		column_id INT(6) UNSIGNED
 	)
 `
 
+const customer_plan = `
+	CREATE TABLE IF NOT EXISTS costumer_plan(
+		id INT(2) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+		working_day VARCHAR(255),
+		resting_day VARCHAR(255)
+	)
+`
+
+//database struct
 type pets struct {
 	ID        int     `db:"id" json:"id"`
 	Name      string  `db:"name" json:"Name" query:"Name"`
@@ -45,6 +55,7 @@ type pets_type struct {
 	Column_id int    `db:"column_id" json:"column_id" query:"column_id"`
 }
 
+//main function
 func main() {
 
 	config := fmt.Sprintf(
@@ -55,7 +66,6 @@ func main() {
 	if err != nil {
 		log.Fatalln(err)
 	}
-
 	// app := fiber.New()
 	// app.Get("/", func(c *fiber.Ctx) error {
 	// 	return c.SendString("Hello, World!")
@@ -80,13 +90,9 @@ func main() {
 
 	// exec the schema or fail; multi-statement Exec behavior varies between
 	// database drivers;  pq will exec them all, sqlite3 won't, ymmv
-	db.MustExec(schema)
-	// db.MustExec(chema)
-
+	// db.MustExec(schema)
+	db.MustExec(customer_plan)
 	tx := db.MustBegin()
-	tx.MustExec("INSERT INTO pets (pet_id) VALUES (?)", 1)
-	// tx.MustExec("INSERT INTO pets_type (type, column_id) VALUES (?, ?)", "wild animal", 2)
-	// tx.MustExec("INSERT INTO pets_type (type, column_id) VALUES (?, ?)", "insect", 3)
 	tx.Commit()
 
 }
